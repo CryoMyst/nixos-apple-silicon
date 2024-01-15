@@ -49,7 +49,7 @@ let
 
   origConfigfile = ./config;
 
-  linux-asahi-pkg = { stdenv, lib, fetchFromGitHub, fetchpatch, linuxKernel,
+  linux-asahi-pkg = { pkgs, stdenv, lib, fetchFromGitHub, fetchpatch, linuxKernel,
       rustPlatform, rustc, rustfmt, rust-bindgen, ... } @ args:
     let
       origConfigText = builtins.readFile origConfigfile;
@@ -137,7 +137,7 @@ let
       nativeBuildInputs = (old.nativeBuildInputs or []) ++ [
         rust-bindgen
         rustfmt
-        rustc
+        pkgs.rust-bin.stable."1.71.0".default
         removeReferencesTo
       ];
       # HACK: references shouldn't have been there in the first place
