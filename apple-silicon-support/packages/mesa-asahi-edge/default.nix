@@ -1,26 +1,22 @@
 { lib
 , fetchFromGitLab
-, mesa
-, llvmPackages
-}:
+, mesa }:
 
 (mesa.override {
   galliumDrivers = [ "swrast" "asahi" ];
   vulkanDrivers = [ "swrast" ];
   enableGalliumNine = false;
-  # libclc and other OpenCL components are needed for geometry shader support on Apple Silicon
-  enableOpenCL = true;
 }).overrideAttrs (oldAttrs: {
   # version must be the same length (i.e. no unstable or date)
   # so that system.replaceRuntimeDependencies can work
-  version = "24.0.0";
+  version = "23.3.0";
   src = fetchFromGitLab {
-    # tracking: https://pagure.io/fedora-asahi/mesa/commits/asahi
+    # tracking: https://github.com/AsahiLinux/PKGBUILDs/blob/main/mesa-asahi-edge/PKGBUILD
     domain = "gitlab.freedesktop.org";
     owner = "asahi";
     repo = "mesa";
-    rev = "asahi-20231213";
-    hash = "sha256-hl0JtwWEXaCkhCMQJ393mzfw/eEx6m9DYNS+spQ3Vhs=";
+    rev = "asahi-20230904";
+    hash = "sha256-hBfXzV8U9fm3cR4KMIl64ypioEeofH3BDl/jZQPLKQg=";
   };
 
   mesonFlags =
