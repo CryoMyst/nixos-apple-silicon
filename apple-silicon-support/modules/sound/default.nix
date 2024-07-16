@@ -11,7 +11,7 @@
   options.hardware.asahi = {
     setupAsahiSound = lib.mkOption {
       type = lib.types.bool;
-      default = config.sound.enable && config.hardware.asahi.enable;
+      default = config.hardware.asahi.enable;
       description = ''
         Set up the Asahi DSP components so that the speakers and headphone jack
         work properly and safely.
